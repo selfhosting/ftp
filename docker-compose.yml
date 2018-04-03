@@ -1,0 +1,17 @@
+version: '2'
+services:
+  store:
+    container_name: files_store_ftp
+    build: ./img
+    restart: always
+    environment:
+    - LDAP_BASE=ou=people,dc=kerjean,dc=me
+    - LDAP_URI=ldap://ldap.kerjean.me
+    - LDAP_BIND_DN=cn=readonly,dc=kerjean,dc=me
+    - LDAP_BIND_PASSWORD=password
+    ports:
+    - "2222:2222"
+    volumes:
+    - ./data:/home/users/
+    - /etc/ssh:/etc/ssh
+    network_mode: bridge
